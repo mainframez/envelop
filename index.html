@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <title>Envelope with Sliding Letter and Hearts</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #dc82ee6b;
+            font-family: "Pacifico", cursive;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            clip-path: path("M 15 30 Q 0 10 15 0 Q 30 10 15 30 Z");
+            top: -40px;
+            animation: float 12s infinite linear;
+            border-radius: 50%;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(-100vh) translateX(0); opacity: 0.5; }
+            100% { transform: translateY(100vh) translateX(calc(20px - 40vw)); opacity: 0; }
+        }
+
+        .heart-stick {
+            position: absolute;
+            width: 30px;
+            height:30px;
+            background-color: rgb(255, 0, 140);
+            transform: rotate(-45deg);
+        }
+
+        .heart-stick::before,
+        .heart-stick::after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height:30px;
+            background-color: rgb(255, 0, 149);
+            border-radius: 50%;
+        }
+
+        .heart-stick::before {
+            top: -15px;
+            left: 0;
+        }
+
+        .heart-stick::after {
+            left: 15px;
+            top: 0;
+        }
+        .heart-stick:first-child {
+            left: 15%;
+            top: 30px;
+        }
+        .heart-stick:last-child {
+            left: 85%;
+            top: 30px;
+        }
+        .heart-stick:nth-of-type(1) {
+    left: 10%;
+    top: 30px;
+      }
+      .heart-stick:nth-of-type(2) {
+    left: 50%;
+    top: 30px;
+}
+.heart-stick:nth-of-type(3) {
+    left: 85%;
+    top: 30px;
+}
+
+
+        .envelope {
+            content: "";
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 400px;
+            height: 300px;
+            background-color: #f75fb2;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+
+        .envelope::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background-color: #ec31a5;
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+            transform-origin: top;
+            transition: transform 0.5s ease;
+        }
+
+        .envelope.open::before {
+            transform: rotateX(180deg);
+        }
+
+        .envelope::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background-color: #fa7dc2;
+            clip-path: polygon(0 100%, 50% 0, 100% 100%);
+        }
+
+        .letter {
+            position: absolute;
+            top: 90%;
+            left: 50%;
+            transform: translate(-50%, -50%) translateY(50px);
+            width: 350px;
+            height: 250px;
+            background-color: rgb(243, 174, 220);
+            border: 1px solid #e67ebb;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .envelope.open .letter {
+            opacity: 1;
+            transform: translate(-50%, -150%);
+        }
+
+        @media (max-width: 600px) {
+            .envelope {
+                width: 350px;
+                height: 300px;
+            }
+            .letter {
+                width: 300px;
+                height: 350px;
+                padding: 10px;
+            }
+            .floating-heart {
+                width: 20px;
+                height: 20px;
+            }
+        }
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: rgb(255, 0, 76);
+            transform: rotate(-45deg);
+            opacity: 0;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: rgb(255, 0, 76);
+            border-radius: 50%;
+        }
+
+        .heart:before {
+            top: -15px;
+            left: 0;
+        }
+
+        .heart:after {
+            left: 15px;
+            top: 0;
+        }
+
+        .envelope.open .heart {
+            opacity: 1;
+            animation: pop 1.5s ease-out forwards;
+        }
+
+        .heart:nth-child(2) { top: 60%; left: 30%; animation-delay: 0.2s; }
+        .heart:nth-child(3) { top: 70%; left: 70%; animation-delay: 0.4s; }
+        .heart:nth-child(4) { top: 55%; left: 50%; animation-delay: 0.6s; }
+
+        @keyframes pop {
+            0% { transform: translateY(0) scale(0); }
+            50% { transform: translateY(-30px) scale(1.2); }
+            100% { transform: translateY(-60px) scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-stick"></div>
+    <div class="heart-stick"></div>
+    <div class="heart-stick"></div>
+    
+    <div class="envelope">
+        <div class="letter">
+            <h3> Happy Birthday </h3>
+            <p> Hey baby!😘  My cute little sweet sa baccha May your all wishes came true and all your dreams came true. And this is just the begninng of the day there are many more surprises left for you babe to make your 20th birthday even more special. Lets gooo!!!</p>
+        </div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+    </div>
+
+    <script>
+        const envelope = document.querySelector('.envelope');
+
+        envelope.addEventListener('click', () => {
+            envelope.classList.toggle('open');
+        });
+        
+        function createFloatingElements(type, color) {
+            for (let i = 0; i < 30; i++) {
+                const element = document.createElement('div');
+                element.classList.add(type);
+                element.style.left = Math.random() * 100 + 'vw';
+                element.style.backgroundColor = color;
+                element.style.animationDuration = Math.random() * 8 + 5 + 's';
+                document.body.appendChild(element);
+            }
+        }
+
+        createFloatingElements('floating-heart', 'red');
+        createFloatingElements('balloon', '#ffcc00');
+    </script>
+</body>
+</html>
